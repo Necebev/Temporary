@@ -1,0 +1,2 @@
+1. Mi a "self" szó jelentése és szerepe egy osztály konstruktorában?
+2. Mi az __iadd__ feladata?
