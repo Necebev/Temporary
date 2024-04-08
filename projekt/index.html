@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Html rekurziók</title>
+    <style>
+        body {
+            background-color: antiquewhite;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+        }
+        #table1 {
+            text-align: center;
+            
+        }
+
+        td {
+            width: 150px;
+        }
+
+    </style>
+</head>
+<body>
+    <button onclick="openPython()">Python forráskód megtekintése</button>
+    <a href="http://localhost:5000/python.html">asd</a>
+    <table id="table1">
+        <tr>
+            <td><p id="1">Szorzás</p></td>
+            <td><p id="2">Hatványozás</p></td>
+            <td><p id="3">Euler sorozat</p></td>
+            <td><p id="4">Fibonacci</p></td>
+            <td><p id="5">Binomiális együttható szorzat</p></td>
+            
+        </tr>
+        <tr>
+            <td><input type="number" step="0.01" id="a"/></td>
+            <td><input type="number" step="0.01" id="c"/></td>
+            <td><input type="number" id="e" min="0"/></td>
+            <td><input type="number" id="f" min="0"/></td>
+            <td><input type="number" id="g" min="0"/></td>
+            
+        </tr>
+        <tr>
+            <td><input type="number" step="0.01" id="b"/></td>
+            <td><input type="number" step="0.01" id="d"/></td>   
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    function szorzas(a,b) { <br>
+                    if (b === 0) return 0;<br>
+                    return a + szorzas(a,b-1)}<br>
+                </p>
+            </td>
+            <td>
+                <p>
+                    function hatvanyozas(a,b) {<br>
+                    if (b === 0) return 1;<br>
+                    return szorzas(hatvanyozas(a,b-1), a)}<br>
+                </p>
+            </td>
+            <td>
+                <p>
+                    function euler(n, k=null) {<br>
+                    if (n === 0) return 1;<br>
+                    if (k === null) k = 1+1/n;<br>
+                    return k*euler(n-1,k)}
+                </p>
+            </td>
+            <td>
+                <p>
+                    function fibonacci(n) {<br>
+                    if (n <= 1) return n+1;<br>
+                    k = fibonacci(n-1) + fibonacci(n-2)<br>
+                    return k;}
+                </p>
+            </td>
+            <td>
+                <p> 
+                    function binomialis(k, n) {<br>
+                    if (k === 0 || k === n) return 1;<br>
+                    return binomialis(k-1, n-1) + binomialis(k, n-1)}<br>
+                    <br>
+                    function binomialis2(f, k=0) {<br>
+                    let list = []<br>
+                    while (k < f+1) {<br>
+                    list.push(binomialis(k,f));<br>
+                    k++;<br>
+                    }<br>
+                    return list}
+                </p>
+            </td>
+        </tr>
+        
+    </table>
+    <button onclick="refresh()">Rekurziók eredményei</button>
+</body>
+<script>
+    function openPython() {
+        window.location.href = 'main.py';
+    };
+    function openHtml() {
+        window.location.href = 'python.html';
+    };
+
+
+    
+
+    function szorzas(a,b) {
+        if (b === 0) return 0;
+        return a + szorzas(a,b-1)}
+
+    function hatvanyozas(a,b) {
+        if (b === 0) return 1;
+        return szorzas(hatvanyozas(a,b-1), a)}
+
+    function euler(n, k=null) {
+        if (n === 0) return 1;
+        if (k === null) k = 1+1/n;
+        return k*euler(n-1,k)}
+
+    function fibonacci(n) {
+        if (n === 0) return 0;
+        if (n === 1) return 1;
+        return fibonacci(n-1) + fibonacci(n-2);
+    }
+
+    function binomialis(k, n) {
+        if (k === 0 || k === n) return 1;
+        return binomialis(k-1, n-1) + binomialis(k, n-1)
+    }
+
+    function binomialis2(f, k=0) {
+        let list = []
+        while (k < f+1) {
+        list.push(binomialis(k,f));
+        k++;
+        }
+        return list
+    }
+
+    function refresh() {
+        let aa = parseFloat(document.getElementById("a").value);
+        let bb = parseFloat(document.getElementById("b").value);
+        let cc = parseFloat(document.getElementById("c").value);
+        let dd = parseFloat(document.getElementById("d").value);
+        let ee = parseFloat(document.getElementById("e").value);
+        let ff = parseFloat(document.getElementById("f").value);
+        let gg = parseFloat(document.getElementById("g").value);
+        let ans1 = szorzas(aa,bb);
+        let ans2 = hatvanyozas(cc, dd);
+        let ans3 = euler(ee);
+        let ans4 = fibonacci(ff)
+        let ans5 = binomialis2(gg)
+        document.getElementById("1").innerHTML = ans1;
+        document.getElementById("2").innerHTML = ans2;
+        document.getElementById("3").innerHTML = ans3;
+        document.getElementById("4").innerHTML = ans4;
+        document.getElementById("5").innerHTML = ans5;
+    }
+
+
+</script>
+</html>

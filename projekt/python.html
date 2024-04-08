@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+    <script src="mini-coi.js" scope="./"></script>
+    <title>Python rekurziók</title>
+    <style>
+        body {
+            background-color: #191A19;
+        }
+    </style>  
+</head>
+<body>
+    <py-script worker terminal>
+        import webbrowser
+
+        def szorzas(a,b):
+            if b == 0:
+                return 0
+            else:
+                return a + szorzas(a, b-1)
+
+        def hatvanyozas(a, b):
+            if b == 0:
+                return 1
+            else:
+                return szorzas(hatvanyozas(a, b-1), a)
+            
+        def euler(n, k=None):
+            if n == 0:
+                return 1
+            if k == None:
+                k = 1+1/n
+            return k * euler(n-1,k)
+
+        def fibonacci(n):
+            if n <= 1:
+                return n
+            else:
+                return fibonacci(n-1) + fibonacci(n-2)
+
+        def binomialis(k, n):
+            if k==0 or k==n:
+                return 1
+            else:
+                return binomialis(k-1, n-1) + binomialis(k, n-1)
+
+        def binomialis2(f, k=0):
+            list = []
+            print("-- Binomiális együtthatók szorzata --")
+            while k < f + 1:
+                x = binomialis(k,f)
+                list.append(x)
+                k += 1
+            print(list)
+
+        def main():
+            choice = input("Függvények megtekintése (func) ")
+            stmt = True
+            while stmt:
+                if choice.lower() == "func":
+                    print(f'Rekurzív függvények')
+                    print("-- Szorzás -- \n")
+                    print(f'{szorzas(float(input("Szorzó: ")), float(input("Szorzandó: ")))}\n')
+                    print("-- Hatványozás -- \n")
+                    print(f'{hatvanyozas(float(input("Alap: ")), int(input("Kitevő: ")))}\n')
+                    print("-- Euler-féle szám -- \n")
+                    print(f'{euler(int(input("Euler n-edik eleme/hatványa: ")))}\n')
+                    print("-- Fibonacci sorozat -- \n")
+                    print(f'{fibonacci(int(input("Fibonacci sorozat n-edik eleme: ")))}\n')
+                    print("-- Binomiális együtthatók szorzata -- \n")
+                    binomialis2(int(input("Binomiális együttható szorzat fokszáma: ")))
+                    stmt = False
+                elif choice.lower() == "html":
+                    webbrowser.open("index.html")
+                    stmt = False
+                else:
+                    print("Nincs ilyen opció")
+                    choice = input("Függvények megtekintése / html file megnyitása (func / html)")
+                    
+        main()
+    </py-script>
+</body>
+</html>
